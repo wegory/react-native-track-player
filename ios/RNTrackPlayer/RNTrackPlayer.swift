@@ -381,7 +381,8 @@ public class RNTrackPlayer: RCTEventEmitter {
     @objc(reset:rejecter:)
     public func reset(resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
         print("Resetting player.")
-        player.stop()
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: .mixWithOthers)
+        player.stop() 
         resolve(NSNull())
         DispatchQueue.main.async {
             UIApplication.shared.endReceivingRemoteControlEvents();
@@ -392,6 +393,7 @@ public class RNTrackPlayer: RCTEventEmitter {
     public func play(resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
         print("Starting/Resuming playback")
         try? AVAudioSession.sharedInstance().setActive(true)
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
         player.play()
         resolve(NSNull())
     }
