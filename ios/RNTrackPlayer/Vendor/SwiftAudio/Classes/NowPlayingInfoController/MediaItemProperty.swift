@@ -83,7 +83,8 @@ public enum MediaItemProperty: NowPlayingInfoKeyValue {
             return title
             
         case .duration(let duration):
-            return duration != nil ? NSNumber(floatLiteral: duration!) : nil
+//             return duration != nil ? NSNumber(floatLiteral: duration!) : nil
+         return duration != nil ? NSNumber(floatLiteral: 0) : nil
             
         case .artwork(let artwork):
             return artwork
